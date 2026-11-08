@@ -147,6 +147,7 @@ No uses el despliegue de demostración como backend de un fork.
 - [Sistema de diseño](docs/DESIGN.md)
 - [Reglas técnicas](docs/RULES.md)
 - [Identidad de marca](docs/brand-guidelines.md)
+- [Backlog y estado](docs/TASKS.md)
 
 ## Contribuir
 
