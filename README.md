@@ -144,13 +144,9 @@ No uses el despliegue de demostración como backend de un fork.
 
 - [Producto y alcance](docs/PRD.md)
 - [Arquitectura](docs/ARCHITECTURE.md)
-- [Modelo del lienzo](docs/CANVAS_MODEL_V2.md)
-- [Especificación del editor](docs/EDITOR_SPEC.md)
 - [Sistema de diseño](docs/DESIGN.md)
 - [Reglas técnicas](docs/RULES.md)
-- [Investigación funcional](docs/RESEARCH.md)
-- [Roadmap](docs/TASKS.md)
-- [Decisiones vivas](docs/MEMORY.md)
+- [Identidad de marca](docs/brand-guidelines.md)
 
 ## Contribuir
 

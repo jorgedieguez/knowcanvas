@@ -64,7 +64,7 @@ La fuente única prioriza el sistema de cada plataforma: `-apple-system`, `Blink
 
 Click selecciona; doble click solo entra en edición cuando sea convencional. Reordenación ofrece arrastre y alternativa por teclado/menú. Los cambios editables no deben perderse al cambiar selección. Deshacer/rehacer se evaluará antes de operaciones complejas. Controles no implementados aparecen deshabilitados con explicación, no simulan éxito.
 
-La especificación operativa y su estado de implementación viven en [`EDITOR_SPEC.md`](EDITOR_SPEC.md). En caso de discrepancia sobre la interacción del editor, ese documento prevalece sobre descripciones antiguas de hitos.
+Los patrones de interacción descritos en este documento son la referencia pública para la experiencia del editor.
 
 ## Responsive y tacto
 
@@ -115,7 +115,7 @@ El shell implementa la dirección visual y los tres paneles sobre la capa canón
 
 ## Migración visual de 2026-10-18
 
-La primera fase de la auditoría `UI_AUDIT.md` está aplicada a elementos compartidos: tipografía, paleta semántica, espaciado, radios, elevación, botones, formularios, navegación, shell, biblioteca e inspector. `ui-system.css` continúa actuando como capa canónica sobre estilos históricos mientras se migran por familias; no se deben añadir nuevos colores, serif o sombras directas a `styles.css`.
+`ui-system.css` actúa como capa canónica para tipografía, paleta semántica, espaciado, radios, elevación, botones, formularios, navegación, shell, biblioteca e inspector. No se deben añadir nuevos colores, serif o sombras directas a `styles.css`.
 
 Las siguientes fases migrarán superficies flotantes accesibles, estados del editor y responsive avanzado sin mezclar esos cambios con esta base visual.
 

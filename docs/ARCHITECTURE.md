@@ -131,7 +131,7 @@ Los widgets incluidos son código confiable. No se evalúan scripts, HTML sin sa
 
 `navigation` v1 mantiene compatibilidad con el botón histórico y añade presentaciones declarativas `index` y `bar`. Ambas persisten una instantánea ordenada de páginas mediante IDs de lienzo y etiquetas editoriales; el inspector permite resincronizarla con el árbol sin acoplar el widget al renderer. Autoría desactiva los destinos, mientras Estudio y exportación resuelven enlaces internos sobre el mismo recorrido.
 
-La composición persistida v2 es un almacén de objetos indexado por ID con `rootIds`, `parentId`, `slotId`, `order` y un `groupId` opcional para transformaciones conjuntas sin introducir contenedores ficticios. Sustituye la envoltura heredada de secciones/columnas y permite que una tabla mueva hijos con coordenadas relativas sin duplicar instancias. El editor y la API trabajan directamente con v2; la frontera de lectura acepta v1 y versiones tempranas de v2 y las migra. RichText y Table usan `schemaVersion: 2`. Las invariantes y la secuencia están documentadas en `CANVAS_MODEL_V2.md`.
+La composición persistida v2 es un almacén de objetos indexado por ID con `rootIds`, `parentId`, `slotId`, `order` y un `groupId` opcional para transformaciones conjuntas sin introducir contenedores ficticios. Sustituye la envoltura heredada de secciones/columnas y permite que una tabla mueva hijos con coordenadas relativas sin duplicar instancias. El editor y la API trabajan directamente con v2; la frontera de lectura acepta v1 y versiones tempranas de v2 y las migra. RichText y Table usan `schemaVersion: 2` y sus invariantes se validan en la frontera de dominio.
 
 ## Persistencia y consistencia
 

@@ -55,7 +55,7 @@ La estructura, el contenido, la composición visual, el comportamiento y el form
 
 ## Propuestas del research pendientes de validación
 
-El desk research de `RESEARCH.md` recomienda cuatro ajustes al MVP que todavía no se consideran alcance aprobado:
+La investigación de producto recomienda cuatro ajustes al MVP que todavía no se consideran alcance aprobado:
 
 1. papelera básica y restauración mediante borrado lógico;
 2. deshacer/rehacer durante la sesión, dejando el historial persistente para P1;

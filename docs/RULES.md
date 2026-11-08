@@ -56,4 +56,4 @@
 
 - Comentarios explican el porqué, no repiten código.
 - Cambios de contrato, arquitectura, diseño o ejecución actualizan el documento dueño.
-- `TASKS.md` refleja evidencia y `MEMORY.md` conserva decisiones/pending relevantes.
+- Los cambios de contratos, arquitectura, interfaz o despliegue deben actualizar la documentación pública correspondiente.

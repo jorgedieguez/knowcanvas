@@ -5,7 +5,7 @@ Gracias por ayudar a mejorar KnowCanvas. El proyecto busca que crear experiencia
 ## Antes de empezar
 
 1. Abre una incidencia para cambios grandes o que alteren contratos persistidos.
-2. Lee [AGENTS.md](AGENTS.md), [docs/RULES.md](docs/RULES.md) y [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+2. Lee [docs/RULES.md](docs/RULES.md) y [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 3. No incluyas credenciales, datos personales ni contenido de usuarios en ejemplos o pruebas.
 
 ## Entorno local
