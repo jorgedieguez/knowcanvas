@@ -150,6 +150,7 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado. Una tarea solo pa
   - Hecho: un clic en espacio vacío abre la biblioteca del inspector; seleccionar allí un widget reutiliza exactamente el mismo modo de colocación.
   - Hecho: la creación primaria aparece sobre el árbol como `+ Nueva página`, acompañada de una acción secundaria de carpeta; renombrar, mover y eliminar permanecen en el menú contextual del nodo, también disponible con clic derecho.
   - Hecho: las propiedades del libro muestran icono y etiqueta visible; el acceso al inspector lateral usa un icono semántico distinto del de configuración.
+  - Hecho: `Delete`/`Backspace` borra widgets con soporte de Deshacer; en el árbol solicita confirmación accesible antes de eliminar una página, una carpeta o sus descendientes, igual que la acción del menú contextual.
   - Evidencia: `npm run check` y 3 E2E Chromium de árbol, inspector y propiedades del libro correctos el 2026-11-08.
   - Hecho: los botones de creación de la barra añaden dentro del nodo activo, indican su destino y la confirmación de borrado muestra el número de nodos afectados.
   - Hecho: widget educativo `Quiz` con autoría en inspector, respuesta única, feedback accesible y reintento en modo estudio.

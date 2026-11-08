@@ -566,7 +566,8 @@
 }
 
 .project-settings-dialog,
-.publish-dialog {
+.publish-dialog,
+.delete-node-dialog {
   width: min(760px, calc(100vw - 32px));
   max-height: min(840px, calc(100dvh - 40px));
   overflow-y: auto;
@@ -574,6 +575,63 @@
   border-radius: var(--ui-radius-xl);
   background: var(--ui-surface);
   box-shadow: var(--ui-shadow-dialog);
+}
+
+.delete-node-dialog {
+  width: min(480px, calc(100vw - 32px));
+}
+
+.delete-node-dialog > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ui-space-4);
+  padding: var(--ui-space-5);
+  border-bottom: 1px solid var(--ui-line);
+}
+
+.delete-node-dialog h2 {
+  margin: 4px 0 0;
+  font-size: 19px;
+}
+
+.delete-node-dialog-body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-space-3);
+  padding: var(--ui-space-5);
+  color: var(--ui-text);
+}
+
+.delete-node-dialog-body > svg {
+  flex: 0 0 auto;
+  color: var(--ui-danger);
+}
+
+.delete-node-dialog-body p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.delete-node-dialog > footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ui-space-2);
+  padding: 0 var(--ui-space-5) var(--ui-space-5);
+}
+
+.delete-node-confirm {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid #c94b3f;
+  border-radius: var(--ui-radius-xs);
+  background: var(--ui-danger-soft);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.delete-node-confirm:hover {
+  background: #f7d8d4;
 }
 
 .project-settings-dialog > header,

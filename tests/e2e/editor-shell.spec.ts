@@ -2151,6 +2151,20 @@ test("manages project tree nodes from their contextual menu", async ({ page }) =
     kind: "canvas",
   });
 
+  const pageNode = page.getByRole("button", { name: "¿Qué es una célula?", exact: true });
+  await pageNode.click();
+  await pageNode.press("Delete");
+  const deleteDialog = page.getByRole("dialog", { name: "¿Eliminar “¿Qué es una célula?”?" });
+  await expect(deleteDialog).toBeVisible();
+  await deleteDialog.getByRole("button", { name: "Cancelar", exact: true }).click();
+  await expect(deleteDialog).toHaveCount(0);
+
+  await page.getByRole("button", { name: "Opciones de ¿Qué es una célula?" }).click();
+  await page.getByRole("menuitem", { name: "Eliminar…" }).click();
+  const deleteRequest = page.waitForRequest("**/api/nodes/node-1");
+  await deleteDialog.getByRole("button", { name: "Eliminar página" }).click();
+  expect((await deleteRequest).method()).toBe("DELETE");
+
   await page.getByRole("button", { name: "Opciones de ¿Qué es una célula?" }).click();
   const moveRequest = page.waitForRequest("**/api/nodes/node-1/move");
   await page.getByRole("menuitem", { name: "Mover a la raíz" }).click();

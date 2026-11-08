@@ -2994,6 +2994,7 @@ function ExplorerPanel({
     [project.nodes],
   );
   const activeNode = project.nodes.find((node) => node.id === activeNodeId) ?? null;
+  const nodePendingDeletion = project.nodes.find((node) => node.id === confirmDeleteId) ?? null;
 
   useEffect(() => {
     const selectedNode = project.nodes.find((node) => node.canvasId === selectedCanvasId);
@@ -3082,296 +3083,368 @@ function ExplorerPanel({
     if (title) onRename(nodeId, title);
     setRenamingNodeId(null);
   }
+
+  function requestNodeDeletion(node: NodeItem) {
+    setMenuNodeId(null);
+    setConfirmDeleteId(node.id);
+  }
+
+  function dismissDeleteConfirmation() {
+    setConfirmDeleteId(null);
+    requestAnimationFrame(() => nodeMenuTrigger.current?.focus());
+  }
+
   return (
-    <aside
-      className={`side-panel explorer ${open ? "mobile-open" : ""} ${collapsed ? "collapsed" : ""}`}
-      aria-label="Explorador"
-    >
-      <div className="panel-heading">
-        <div>
-          <span className="eyebrow">Estructura</span>
-          <h2>Explorador</h2>
-        </div>
-        <button
-          className="icon-button desktop-only"
-          type="button"
-          aria-label="Volver a la biblioteca"
-          title="Volver a la biblioteca"
-          onClick={onBack}
-        >
-          <ArrowLeft size={17} />
-        </button>
-        <button
-          className="icon-button mobile-only"
-          type="button"
-          aria-label="Cerrar explorador"
-          onClick={onClose}
-        >
-          <X size={18} />
-        </button>
-        <button
-          className="icon-button desktop-only explorer-collapse"
-          type="button"
-          aria-label={collapsed ? "Expandir explorador" : "Contraer explorador"}
-          title={collapsed ? "Expandir explorador" : "Contraer explorador"}
-          onClick={onToggleCollapsed}
-        >
-          {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
-        </button>
-      </div>
-
-      <label className="search-field">
-        <Search size={16} aria-hidden="true" />
-        <span className="sr-only">Buscar en el libro</span>
-        <input type="search" placeholder="Buscar en el libro" disabled />
-      </label>
-
-      <div className="explorer-tree-toolbar" aria-label="Crear en el árbol">
-        <button
-          className="tree-create-button"
-          type="button"
-          title={
-            activeNode ? `Crear página dentro de ${activeNode.title}` : "Crear página en la raíz"
+    <>
+      <aside
+        className={`side-panel explorer ${open ? "mobile-open" : ""} ${collapsed ? "collapsed" : ""}`}
+        aria-label="Explorador"
+        onKeyDown={(event) => {
+          if (event.key !== "Delete" && event.key !== "Backspace") return;
+          const target = event.target;
+          if (
+            target instanceof HTMLInputElement ||
+            target instanceof HTMLTextAreaElement ||
+            (target instanceof HTMLElement && target.isContentEditable) ||
+            !activeNode
+          ) {
+            return;
           }
-          onClick={() => onAdd("canvas", activeNode?.id ?? null)}
-        >
-          <Plus size={16} aria-hidden="true" />
-          <span>Nueva página</span>
-        </button>
-        <button
-          className="tree-create-folder"
-          type="button"
-          aria-label={
-            activeNode ? `Crear carpeta dentro de ${activeNode.title}` : "Crear carpeta en la raíz"
-          }
-          title={
-            activeNode ? `Crear carpeta dentro de ${activeNode.title}` : "Crear carpeta en la raíz"
-          }
-          onClick={() => onAdd("container", activeNode?.id ?? null)}
-        >
-          <FolderPlus size={16} aria-hidden="true" />
-        </button>
-      </div>
-
-      <nav className="tree" aria-label="Árbol del proyecto">
-        <div
-          className={`tree-root ${projectSelected ? "active" : ""}`}
-          onDragOver={(event) => event.preventDefault()}
-          onDrop={(event) => {
-            event.preventDefault();
-            const nodeId = event.dataTransfer.getData("application/x-knowcanvas-node");
-            if (nodeId) onMove(nodeId, null);
-          }}
-        >
-          <ChevronDown size={15} aria-hidden="true" />
+          event.preventDefault();
+          event.stopPropagation();
+          requestNodeDeletion(activeNode);
+        }}
+      >
+        <div className="panel-heading">
+          <div>
+            <span className="eyebrow">Estructura</span>
+            <h2>Explorador</h2>
+          </div>
           <button
-            className="tree-root-select"
+            className="icon-button desktop-only"
             type="button"
-            aria-current={projectSelected ? "page" : undefined}
-            onClick={onSelectProject}
+            aria-label="Volver a la biblioteca"
+            title="Volver a la biblioteca"
+            onClick={onBack}
           >
-            <span className="root-icon">
-              <LayoutGrid size={15} />
-            </span>
-            <strong>{project.name}</strong>
+            <ArrowLeft size={17} />
+          </button>
+          <button
+            className="icon-button mobile-only"
+            type="button"
+            aria-label="Cerrar explorador"
+            onClick={onClose}
+          >
+            <X size={18} />
+          </button>
+          <button
+            className="icon-button desktop-only explorer-collapse"
+            type="button"
+            aria-label={collapsed ? "Expandir explorador" : "Contraer explorador"}
+            title={collapsed ? "Expandir explorador" : "Contraer explorador"}
+            onClick={onToggleCollapsed}
+          >
+            {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
           </button>
         </div>
-        {rows.map(({ node, depth }) => (
+
+        <label className="search-field">
+          <Search size={16} aria-hidden="true" />
+          <span className="sr-only">Buscar en el libro</span>
+          <input type="search" placeholder="Buscar en el libro" disabled />
+        </label>
+
+        <div className="explorer-tree-toolbar" aria-label="Crear en el árbol">
+          <button
+            className="tree-create-button"
+            type="button"
+            title={
+              activeNode ? `Crear página dentro de ${activeNode.title}` : "Crear página en la raíz"
+            }
+            onClick={() => onAdd("canvas", activeNode?.id ?? null)}
+          >
+            <Plus size={16} aria-hidden="true" />
+            <span>Nueva página</span>
+          </button>
+          <button
+            className="tree-create-folder"
+            type="button"
+            aria-label={
+              activeNode
+                ? `Crear carpeta dentro de ${activeNode.title}`
+                : "Crear carpeta en la raíz"
+            }
+            title={
+              activeNode
+                ? `Crear carpeta dentro de ${activeNode.title}`
+                : "Crear carpeta en la raíz"
+            }
+            onClick={() => onAdd("container", activeNode?.id ?? null)}
+          >
+            <FolderPlus size={16} aria-hidden="true" />
+          </button>
+        </div>
+
+        <nav className="tree" aria-label="Árbol del proyecto">
           <div
-            className={`tree-row ${activeNodeId === node.id ? "tree-row-selected" : ""} ${dropTarget?.nodeId === node.id ? `drop-${dropTarget.mode}` : ""}`}
-            style={{ "--depth": depth } as CSSProperties}
-            key={node.id}
-            onContextMenu={(event) => {
-              event.preventDefault();
-              setActiveNodeId(node.id);
-              setConfirmDeleteId(null);
-              nodeMenuTrigger.current = event.currentTarget.querySelector(".tree-node-menu-button");
-              setMenuNodeId(node.id);
-            }}
-            onDragOver={(event) => {
-              event.preventDefault();
-              const bounds = event.currentTarget.getBoundingClientRect();
-              const ratio = (event.clientY - bounds.top) / bounds.height;
-              setDropTarget({
-                nodeId: node.id,
-                mode: ratio < 0.25 ? "before" : ratio > 0.75 ? "after" : "inside",
-              });
-            }}
-            onDragLeave={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-                setDropTarget(null);
-              }
-            }}
+            className={`tree-root ${projectSelected ? "active" : ""}`}
+            onDragOver={(event) => event.preventDefault()}
             onDrop={(event) => {
               event.preventDefault();
-              event.stopPropagation();
               const nodeId = event.dataTransfer.getData("application/x-knowcanvas-node");
-              const mode = dropTarget?.nodeId === node.id ? dropTarget.mode : "inside";
-              setDropTarget(null);
-              if (!nodeId || nodeId === node.id) return;
-              if (mode === "inside") {
-                onMove(nodeId, node.id);
-                return;
-              }
-              const siblings = project.nodes
-                .filter(
-                  (candidate) => candidate.parentId === node.parentId && candidate.id !== nodeId,
-                )
-                .sort((a, b) => a.position - b.position);
-              const targetIndex = siblings.findIndex((candidate) => candidate.id === node.id);
-              onMove(nodeId, node.parentId, targetIndex + (mode === "after" ? 1 : 0));
+              if (nodeId) onMove(nodeId, null);
             }}
           >
-            {renamingNodeId === node.id ? (
-              <input
-                className="tree-rename-input"
-                autoFocus
-                value={renameValue}
-                onChange={(event) => setRenameValue(event.target.value)}
-                onBlur={() => finishRename(node.id)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") finishRename(node.id);
-                  if (event.key === "Escape") setRenamingNodeId(null);
-                }}
-              />
-            ) : (
-              <>
-                {parentNodeIds.has(node.id) ? (
-                  <button
-                    className="tree-expand-button"
-                    type="button"
-                    aria-label={
-                      collapsedNodes.has(node.id)
-                        ? `Expandir ${node.title}`
-                        : `Contraer ${node.title}`
-                    }
-                    onClick={() => toggleNode(node.id)}
-                  >
-                    <ChevronDown
-                      className={collapsedNodes.has(node.id) ? "collapsed-chevron" : ""}
-                      size={14}
-                    />
-                  </button>
-                ) : (
-                  <span className="tree-expand-spacer" />
-                )}
-                <button
-                  className={`tree-item ${node.canvasId === selectedCanvasId ? "active" : ""}`}
-                  type="button"
-                  draggable
-                  onDragStart={(event) =>
-                    event.dataTransfer.setData("application/x-knowcanvas-node", node.id)
-                  }
-                  onClick={() => {
-                    setMenuNodeId(null);
-                    setActiveNodeId(node.id);
-                    if (node.kind === "container") toggleNode(node.id);
-                    else if (node.canvasId) onSelect(node.canvasId);
-                  }}
-                  onDoubleClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                  }}
-                  aria-current={node.canvasId === selectedCanvasId ? "page" : undefined}
-                >
-                  {node.kind === "container" ? <Folder size={15} /> : <FileText size={15} />}
-                  <span>{node.title}</span>
-                </button>
-              </>
-            )}
+            <ChevronDown size={15} aria-hidden="true" />
             <button
-              className="tree-node-menu-button"
+              className="tree-root-select"
               type="button"
-              aria-label={`Opciones de ${node.title}`}
-              aria-haspopup="menu"
-              aria-expanded={menuNodeId === node.id}
-              aria-controls={menuNodeId === node.id ? `node-menu-${node.id}` : undefined}
-              onClick={(event) => {
-                nodeMenuTrigger.current = event.currentTarget;
+              aria-current={projectSelected ? "page" : undefined}
+              onClick={onSelectProject}
+            >
+              <span className="root-icon">
+                <LayoutGrid size={15} />
+              </span>
+              <strong>{project.name}</strong>
+            </button>
+          </div>
+          {rows.map(({ node, depth }) => (
+            <div
+              className={`tree-row ${activeNodeId === node.id ? "tree-row-selected" : ""} ${dropTarget?.nodeId === node.id ? `drop-${dropTarget.mode}` : ""}`}
+              style={{ "--depth": depth } as CSSProperties}
+              key={node.id}
+              onContextMenu={(event) => {
+                event.preventDefault();
+                setActiveNodeId(node.id);
                 setConfirmDeleteId(null);
-                setMenuNodeId((current) => (current === node.id ? null : node.id));
+                nodeMenuTrigger.current =
+                  event.currentTarget.querySelector(".tree-node-menu-button");
+                setMenuNodeId(node.id);
+              }}
+              onDragOver={(event) => {
+                event.preventDefault();
+                const bounds = event.currentTarget.getBoundingClientRect();
+                const ratio = (event.clientY - bounds.top) / bounds.height;
+                setDropTarget({
+                  nodeId: node.id,
+                  mode: ratio < 0.25 ? "before" : ratio > 0.75 ? "after" : "inside",
+                });
+              }}
+              onDragLeave={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                  setDropTarget(null);
+                }
+              }}
+              onDrop={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                const nodeId = event.dataTransfer.getData("application/x-knowcanvas-node");
+                const mode = dropTarget?.nodeId === node.id ? dropTarget.mode : "inside";
+                setDropTarget(null);
+                if (!nodeId || nodeId === node.id) return;
+                if (mode === "inside") {
+                  onMove(nodeId, node.id);
+                  return;
+                }
+                const siblings = project.nodes
+                  .filter(
+                    (candidate) => candidate.parentId === node.parentId && candidate.id !== nodeId,
+                  )
+                  .sort((a, b) => a.position - b.position);
+                const targetIndex = siblings.findIndex((candidate) => candidate.id === node.id);
+                onMove(nodeId, node.parentId, targetIndex + (mode === "after" ? 1 : 0));
               }}
             >
-              <MoreHorizontal size={15} />
-            </button>
-            {menuNodeId === node.id ? (
-              <AccessibleMenu
-                id={`node-menu-${node.id}`}
-                className="tree-node-menu"
-                label={`Opciones de ${node.title}`}
-                onDismiss={() => {
-                  setMenuNodeId(null);
+              {renamingNodeId === node.id ? (
+                <input
+                  className="tree-rename-input"
+                  autoFocus
+                  value={renameValue}
+                  onChange={(event) => setRenameValue(event.target.value)}
+                  onBlur={() => finishRename(node.id)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") finishRename(node.id);
+                    if (event.key === "Escape") setRenamingNodeId(null);
+                  }}
+                />
+              ) : (
+                <>
+                  {parentNodeIds.has(node.id) ? (
+                    <button
+                      className="tree-expand-button"
+                      type="button"
+                      aria-label={
+                        collapsedNodes.has(node.id)
+                          ? `Expandir ${node.title}`
+                          : `Contraer ${node.title}`
+                      }
+                      onClick={() => toggleNode(node.id)}
+                    >
+                      <ChevronDown
+                        className={collapsedNodes.has(node.id) ? "collapsed-chevron" : ""}
+                        size={14}
+                      />
+                    </button>
+                  ) : (
+                    <span className="tree-expand-spacer" />
+                  )}
+                  <button
+                    className={`tree-item ${node.canvasId === selectedCanvasId ? "active" : ""}`}
+                    type="button"
+                    draggable
+                    onDragStart={(event) =>
+                      event.dataTransfer.setData("application/x-knowcanvas-node", node.id)
+                    }
+                    onClick={() => {
+                      setMenuNodeId(null);
+                      setActiveNodeId(node.id);
+                      if (node.kind === "container") toggleNode(node.id);
+                      else if (node.canvasId) onSelect(node.canvasId);
+                    }}
+                    onDoubleClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }}
+                    aria-current={node.canvasId === selectedCanvasId ? "page" : undefined}
+                    aria-keyshortcuts="Delete Backspace"
+                  >
+                    {node.kind === "container" ? <Folder size={15} /> : <FileText size={15} />}
+                    <span>{node.title}</span>
+                  </button>
+                </>
+              )}
+              <button
+                className="tree-node-menu-button"
+                type="button"
+                aria-label={`Opciones de ${node.title}`}
+                aria-haspopup="menu"
+                aria-expanded={menuNodeId === node.id}
+                aria-controls={menuNodeId === node.id ? `node-menu-${node.id}` : undefined}
+                onClick={(event) => {
+                  nodeMenuTrigger.current = event.currentTarget;
                   setConfirmDeleteId(null);
+                  setMenuNodeId((current) => (current === node.id ? null : node.id));
                 }}
-                returnFocusRef={nodeMenuTrigger}
               >
-                <button type="button" role="menuitem" onClick={() => startRename(node)}>
-                  Renombrar
-                </button>
-                <button
-                  type="button"
-                  role="menuitem"
-                  onClick={() => {
+                <MoreHorizontal size={15} />
+              </button>
+              {menuNodeId === node.id ? (
+                <AccessibleMenu
+                  id={`node-menu-${node.id}`}
+                  className="tree-node-menu"
+                  label={`Opciones de ${node.title}`}
+                  onDismiss={() => {
                     setMenuNodeId(null);
-                    onAdd("canvas", node.id);
+                    setConfirmDeleteId(null);
                   }}
+                  returnFocusRef={nodeMenuTrigger}
                 >
-                  Nuevo lienzo dentro
-                </button>
-                <button
-                  type="button"
-                  role="menuitem"
-                  onClick={() => {
-                    setMenuNodeId(null);
-                    onAdd("container", node.id);
-                  }}
-                >
-                  Nueva carpeta dentro
-                </button>
-                <button type="button" role="menuitem" onClick={() => moveRelative(node, -1)}>
-                  Mover arriba
-                </button>
-                <button type="button" role="menuitem" onClick={() => moveRelative(node, 1)}>
-                  Mover abajo
-                </button>
-                {node.parentId ? (
+                  <button type="button" role="menuitem" onClick={() => startRename(node)}>
+                    Renombrar
+                  </button>
                   <button
                     type="button"
                     role="menuitem"
                     onClick={() => {
                       setMenuNodeId(null);
-                      onMove(node.id, null);
+                      onAdd("canvas", node.id);
                     }}
                   >
-                    Mover a la raíz
+                    Nuevo lienzo dentro
                   </button>
-                ) : null}
-                <button
-                  className="danger"
-                  type="button"
-                  role="menuitem"
-                  onClick={() => {
-                    if (confirmDeleteId === node.id) {
-                      onDelete(node.id);
+                  <button
+                    type="button"
+                    role="menuitem"
+                    onClick={() => {
                       setMenuNodeId(null);
-                      setConfirmDeleteId(null);
-                    } else setConfirmDeleteId(node.id);
-                  }}
-                >
-                  {confirmDeleteId === node.id
-                    ? `Confirmar: eliminar ${descendantCount(node.id) + 1} elemento${descendantCount(node.id) === 0 ? "" : "s"}`
-                    : "Eliminar"}
-                </button>
-              </AccessibleMenu>
-            ) : null}
-          </div>
-        ))}
-      </nav>
+                      onAdd("container", node.id);
+                    }}
+                  >
+                    Nueva carpeta dentro
+                  </button>
+                  <button type="button" role="menuitem" onClick={() => moveRelative(node, -1)}>
+                    Mover arriba
+                  </button>
+                  <button type="button" role="menuitem" onClick={() => moveRelative(node, 1)}>
+                    Mover abajo
+                  </button>
+                  {node.parentId ? (
+                    <button
+                      type="button"
+                      role="menuitem"
+                      onClick={() => {
+                        setMenuNodeId(null);
+                        onMove(node.id, null);
+                      }}
+                    >
+                      Mover a la raíz
+                    </button>
+                  ) : null}
+                  <button
+                    className="danger"
+                    type="button"
+                    role="menuitem"
+                    onClick={() => requestNodeDeletion(node)}
+                  >
+                    Eliminar…
+                  </button>
+                </AccessibleMenu>
+              ) : null}
+            </div>
+          ))}
+        </nav>
 
-      <div className="panel-footer explorer-status">
-        <span>{project.nodes.length} elementos · clic derecho para más acciones</span>
-      </div>
-    </aside>
+        <div className="panel-footer explorer-status">
+          <span>{project.nodes.length} elementos · clic derecho para más acciones</span>
+        </div>
+      </aside>
+      {nodePendingDeletion ? (
+        <Dialog
+          className="delete-node-dialog"
+          labelledBy="delete-node-title"
+          onDismiss={dismissDeleteConfirmation}
+        >
+          <header>
+            <div>
+              <span className="eyebrow">Acción irreversible</span>
+              <h2 id="delete-node-title">¿Eliminar “{nodePendingDeletion.title}”?</h2>
+            </div>
+            <button
+              className="icon-button"
+              type="button"
+              aria-label="Cancelar eliminación"
+              onClick={dismissDeleteConfirmation}
+            >
+              <X size={18} />
+            </button>
+          </header>
+          <div className="delete-node-dialog-body">
+            <Trash2 size={22} aria-hidden="true" />
+            <p>
+              {nodePendingDeletion.kind === "container"
+                ? `Se eliminará la carpeta y sus ${descendantCount(nodePendingDeletion.id)} elementos internos.`
+                : "Se eliminará la página y todo su contenido."}{" "}
+              Esta acción no se puede deshacer.
+            </p>
+          </div>
+          <footer>
+            <button className="secondary-button" type="button" onClick={dismissDeleteConfirmation}>
+              Cancelar
+            </button>
+            <button
+              className="danger-button delete-node-confirm"
+              type="button"
+              onClick={() => {
+                onDelete(nodePendingDeletion.id);
+                setConfirmDeleteId(null);
+              }}
+            >
+              Eliminar {nodePendingDeletion.kind === "container" ? "carpeta" : "página"}
+            </button>
+          </footer>
+        </Dialog>
+      ) : null}
+    </>
   );
 }
 

@@ -4,6 +4,8 @@ La identidad visual sigue [`brand-guidelines.md`](./brand-guidelines.md). El pro
 
 En el explorador, crear una página es una acción primaria visible inmediatamente encima del árbol mediante `+ Nueva página`; crear carpeta es secundaria y comparte la misma zona. Las operaciones que requieren un nodo concreto —renombrar, mover o eliminar— pertenecen a su menú contextual. Los accesos a Propiedades combinan icono y texto cuando hay espacio suficiente y conservan un nombre accesible en vistas compactas.
 
+La eliminación distingue alcance y recuperación: los widgets seleccionados se borran con `Delete`/`Backspace` y pueden recuperarse con Deshacer; una página o carpeta seleccionada abre siempre una confirmación modal, tanto desde el teclado como desde su menú contextual. La confirmación nombra el destino, explica los descendientes afectados y devuelve el foco al árbol al cancelar.
+
 > Actualización 2026-10-26: los bloques educativos desplegables se editan en Propiedades y permanecen inertes en autoría. En Estudiar usan botones con `aria-expanded`/`aria-controls`, objetivos de 48 px, foco nativo y movimiento desactivable.
 
 El editor enriquecido tiene dos presentaciones coherentes: menú contextual sobre selección cuando se edita directamente en el lienzo y barra persistente cuando se edita desde Propiedades. Ambas usan los mismos comandos y documento; la barra fija ofrece bloque, encabezado, énfasis, subrayado, tachado, enlace, lista, cita, código, tabla, imagen, limpiar formato y vista Markdown.
