@@ -5,7 +5,7 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado. Una tarea solo pa
 ## Hito 1 — Fundación
 
 - [x] Crear repositorio y estructura documental obligatoria.
-  - Criterio: `AGENTS.md`, seis documentos vivos, `README.md`, `src/` y `tests/` existen con contenido útil.
+  - Criterio: `README.md`, documentación pública, `src/` y `tests/` existen con contenido útil.
   - Evidencia: revisión de archivos del 2026-10-09.
 - [x] Configurar React, Vite, TypeScript estricto y Tailwind.
   - Criterio: instalación reproducible; `typecheck` y build correctos.
@@ -27,13 +27,13 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado. Una tarea solo pa
 
 - [x] Analizar referentes de conocimiento, autoría educativa, pizarras, simulación y publicación.
   - Criterio: matriz comparativa basada principalmente en fuentes oficiales.
-  - Evidencia: `docs/RESEARCH.md`, 2026-10-09.
+  - Evidencia: investigación funcional completada el 2026-10-09.
 - [x] Priorizar capacidades P0/P1/P2 y definir flujos objetivo.
   - Criterio: recomendaciones vinculadas a riesgos y oportunidad diferencial.
   - Evidencia: secciones “Capacidades recomendadas”, “Flujos” y “Riesgos” del research.
 - [x] Revisar estándares de accesibilidad e interoperabilidad.
   - Criterio: consecuencias de WCAG/ATAG documentadas; LTI/xAPI posicionados fuera del MVP.
-  - Evidencia: `docs/RESEARCH.md` con fuentes W3C, 1EdTech y ADL.
+  - Evidencia: contraste realizado con fuentes W3C, 1EdTech y ADL.
 - [x] Validar decisiones de alcance que afectan el Hito 2.
   - Criterio: aceptar o rechazar papelera, undo de sesión, duplicación y retirada de publicaciones.
   - Evidencia: aceptadas las cuatro recomendaciones al continuar el Hito 2, 2026-10-09.
@@ -43,7 +43,7 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado. Una tarea solo pa
 
 ## Hito 2 — Modelo, árbol y persistencia
 
-- [x] Resolver las cuatro decisiones de alcance de `docs/RESEARCH.md` antes de fijar el esquema.
+- [x] Resolver las cuatro decisiones de alcance de la investigación antes de fijar el esquema.
 - [~] Implementar Google OIDC, sesiones revocables y `GET /api/me` con pruebas.
   - Hecho: Authorization Code + PKCE, nonce/state, sesión opaca revocable y estado de acceso.
   - Hecho: producción acepta cualquier cuenta Google; retirada la allowlist `AUTH_ALLOWED_EMAILS` el 2026-10-24.
@@ -94,7 +94,7 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado. Una tarea solo pa
   - Hecho: consolidación visual profesional del acceso, biblioteca y workspace; una única paleta neutral, densidad de herramienta, superficies planas y selección azul.
   - Hecho: biblioteca responsive con jerarquía de colección, tarjetas reutilizables y fechas semánticas; validada visualmente en Chromium.
 
-- [~] Ejecutar por fases la experiencia aprobada en `docs/EDITOR_SPEC.md`.
+- [~] Ejecutar por fases la experiencia de edición aprobada.
   - Fase 1 terminada: selección jerárquica, doble clic, `Enter`, `Escape`, Excalidraw directo e imágenes internas como nodos seleccionables con inspector y redimensionado.
   - Fase 2 terminada: barra contextual, duplicado, frente/fondo, bloqueo y eliminación.
   - Fase 3 terminada en su alcance inicial: inspector por pestañas, contenido editable, geometría y bloqueo.
