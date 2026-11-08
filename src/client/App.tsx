@@ -15,6 +15,7 @@ import {
   ExternalLink,
   FileText,
   Folder,
+  FolderPlus,
   Globe2,
   Image,
   GripVertical,
@@ -30,6 +31,7 @@ import {
   MousePointer2,
   Network,
   PanelRightClose,
+  PanelRightOpen,
   PanelLeftClose,
   PanelLeftOpen,
   Package,
@@ -2004,13 +2006,14 @@ function Application() {
           </div>
           {project.isOwner ? (
             <button
-              className="icon-button project-settings-trigger"
+              className="project-settings-trigger"
               type="button"
               aria-label="Propiedades del libro"
               title="Propiedades del libro"
               onClick={() => setProjectSettingsOpen(true)}
             >
               <Settings2 size={15} />
+              <span>Propiedades</span>
             </button>
           ) : null}
         </div>
@@ -2065,7 +2068,7 @@ function Application() {
               aria-label="Propiedades del libro"
               onClick={() => setProjectSettingsOpen(true)}
             >
-              <BookOpen size={18} />
+              <Settings2 size={18} />
             </button>
           ) : null}
           {mode === "edit" ? (
@@ -2075,7 +2078,7 @@ function Application() {
               aria-label="Abrir propiedades"
               onClick={() => setPropertiesOpen(true)}
             >
-              <Settings2 size={19} />
+              <PanelRightOpen size={19} />
             </button>
           ) : null}
         </div>
@@ -3123,6 +3126,33 @@ function ExplorerPanel({
         <input type="search" placeholder="Buscar en el libro" disabled />
       </label>
 
+      <div className="explorer-tree-toolbar" aria-label="Crear en el árbol">
+        <button
+          className="tree-create-button"
+          type="button"
+          title={
+            activeNode ? `Crear página dentro de ${activeNode.title}` : "Crear página en la raíz"
+          }
+          onClick={() => onAdd("canvas", activeNode?.id ?? null)}
+        >
+          <Plus size={16} aria-hidden="true" />
+          <span>Nueva página</span>
+        </button>
+        <button
+          className="tree-create-folder"
+          type="button"
+          aria-label={
+            activeNode ? `Crear carpeta dentro de ${activeNode.title}` : "Crear carpeta en la raíz"
+          }
+          title={
+            activeNode ? `Crear carpeta dentro de ${activeNode.title}` : "Crear carpeta en la raíz"
+          }
+          onClick={() => onAdd("container", activeNode?.id ?? null)}
+        >
+          <FolderPlus size={16} aria-hidden="true" />
+        </button>
+      </div>
+
       <nav className="tree" aria-label="Árbol del proyecto">
         <div
           className={`tree-root ${projectSelected ? "active" : ""}`}
@@ -3338,52 +3368,8 @@ function ExplorerPanel({
         ))}
       </nav>
 
-      <div className="panel-footer">
-        <div className="new-element-actions">
-          <button
-            className="secondary-button"
-            type="button"
-            title={activeNode ? `Crear lienzo dentro de ${activeNode.title}` : "Crear en la raíz"}
-            onClick={() => onAdd("canvas", activeNode?.id ?? null)}
-          >
-            <Plus size={16} />
-            Lienzo
-          </button>
-          <button
-            className="secondary-button"
-            type="button"
-            title={activeNode ? `Crear carpeta dentro de ${activeNode.title}` : "Crear en la raíz"}
-            onClick={() => onAdd("container", activeNode?.id ?? null)}
-          >
-            <Folder size={15} />
-            Carpeta
-          </button>
-          <button
-            className="secondary-button danger"
-            type="button"
-            disabled={!activeNode}
-            aria-label={activeNode ? `Eliminar ${activeNode.title}` : "Eliminar nodo"}
-            onClick={() => {
-              if (!activeNode) return;
-              if (confirmDeleteId === activeNode.id) {
-                onDelete(activeNode.id);
-                setActiveNodeId(null);
-                setConfirmDeleteId(null);
-              } else {
-                setConfirmDeleteId(activeNode.id);
-              }
-            }}
-          >
-            <Trash2 size={15} />
-            {activeNode && confirmDeleteId === activeNode.id
-              ? `Confirmar (${descendantCount(activeNode.id) + 1})`
-              : "Eliminar"}
-          </button>
-        </div>
-        <span>
-          {activeNode ? `Añadir dentro de “${activeNode.title}”` : "Añadir en la raíz"} ·{" "}
-          {project.nodes.length} elementos
-        </span>
+      <div className="panel-footer explorer-status">
+        <span>{project.nodes.length} elementos · clic derecho para más acciones</span>
       </div>
     </aside>
   );

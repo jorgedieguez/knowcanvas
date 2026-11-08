@@ -2130,9 +2130,10 @@ test("manages project tree nodes from their contextual menu", async ({ page }) =
   await page.goto("/");
   await page.getByRole("button", { name: /Explorando la célula/ }).click();
 
-  await expect(page.getByRole("button", { name: "Lienzo", exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Carpeta", exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Eliminar ¿Qué es una célula?" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Nueva página", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Crear carpeta dentro de ¿Qué es una célula?" }),
+  ).toBeVisible();
 
   await page.getByRole("button", { name: "¿Qué es una célula?", exact: true }).click({
     button: "right",
@@ -2144,7 +2145,7 @@ test("manages project tree nodes from their contextual menu", async ({ page }) =
   await page.getByRole("button", { name: "Introducción", exact: true }).click({ button: "right" });
   await page.locator(".canvas-toolbar").click();
   const toolbarCreateRequest = page.waitForRequest("**/api/projects/project-1/nodes");
-  await page.getByRole("button", { name: "Lienzo", exact: true }).click();
+  await page.getByRole("button", { name: "Nueva página", exact: true }).click();
   expect((await toolbarCreateRequest).postDataJSON()).toMatchObject({
     parentId: "folder-1",
     kind: "canvas",

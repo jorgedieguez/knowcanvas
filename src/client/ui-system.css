@@ -540,17 +540,29 @@
 }
 
 .project-settings-trigger {
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-  min-height: 30px;
-  opacity: 0.55;
-  transition: opacity var(--ui-motion-fast) var(--ui-ease);
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--ui-muted);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color var(--ui-motion-fast) var(--ui-ease),
+    border-color var(--ui-motion-fast) var(--ui-ease),
+    background var(--ui-motion-fast) var(--ui-ease);
 }
 
 .project-identity:hover .project-settings-trigger,
 .project-settings-trigger:focus-visible {
-  opacity: 1;
+  color: var(--ui-text);
+  border-color: var(--ui-line);
+  background: var(--ui-muted-surface);
 }
 
 .project-settings-dialog,
@@ -844,7 +856,12 @@
 
 @media (max-width: 620px) {
   .project-settings-trigger {
-    opacity: 1;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .project-settings-trigger span {
+    display: none;
   }
 
   .project-settings-dialog {

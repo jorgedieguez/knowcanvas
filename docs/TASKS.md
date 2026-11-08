@@ -148,7 +148,9 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado. Una tarea solo pa
   - Hecho: la biblioteca del panel de propiedades inserta todos los widgets implementados en el lienzo actual, incluidos Quiz y el motor interactivo de clasificación.
   - Hecho: catálogo e inspector activan un modo de colocación visible con previsualización al cursor, confirmación por clic y cancelación con `Esc`; el objeto colocado queda seleccionado.
   - Hecho: un clic en espacio vacío abre la biblioteca del inspector; seleccionar allí un widget reutiliza exactamente el mismo modo de colocación.
-  - Hecho: la barra de organización del árbol incluye añadir lienzo, añadir carpeta y eliminar el nodo activo; el menú contextual también responde al clic derecho.
+  - Hecho: la creación primaria aparece sobre el árbol como `+ Nueva página`, acompañada de una acción secundaria de carpeta; renombrar, mover y eliminar permanecen en el menú contextual del nodo, también disponible con clic derecho.
+  - Hecho: las propiedades del libro muestran icono y etiqueta visible; el acceso al inspector lateral usa un icono semántico distinto del de configuración.
+  - Evidencia: `npm run check` y 3 E2E Chromium de árbol, inspector y propiedades del libro correctos el 2026-11-08.
   - Hecho: los botones de creación de la barra añaden dentro del nodo activo, indican su destino y la confirmación de borrado muestra el número de nodos afectados.
   - Hecho: widget educativo `Quiz` con autoría en inspector, respuesta única, feedback accesible y reintento en modo estudio.
   - Hecho: botón de navegación configurable hacia otro lienzo o una URL externa, activo únicamente en modo estudio.

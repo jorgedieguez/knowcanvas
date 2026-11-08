@@ -432,18 +432,6 @@ button:disabled {
   font-size: 12px;
   transform: translateX(-50%);
 }
-.new-element-actions {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
-}
-.new-element-actions .secondary-button {
-  min-width: 0;
-  padding-inline: 8px;
-}
-.new-element-actions .secondary-button.danger:not(:disabled) {
-  color: var(--ui-danger);
-}
 .tree-row-selected .tree-item:not(.active) {
   background: var(--ui-hover);
 }
@@ -675,6 +663,7 @@ button:disabled {
 }
 .explorer.collapsed .panel-heading > div,
 .explorer.collapsed .search-field,
+.explorer.collapsed .explorer-tree-toolbar,
 .explorer.collapsed .panel-footer,
 .explorer.collapsed .tree-root strong,
 .explorer.collapsed .tree-item > span:last-child {
@@ -743,6 +732,46 @@ button:disabled {
 }
 .search-field input:disabled {
   opacity: 1;
+}
+.explorer-tree-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 36px;
+  gap: 6px;
+  margin: 0 10px 10px;
+}
+.tree-create-button,
+.tree-create-folder {
+  min-height: 36px;
+  border: 1px solid #d9e5f7;
+  border-radius: 8px;
+  color: #245ca8;
+  background: #f3f7fd;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.tree-create-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 0 11px;
+}
+.tree-create-folder {
+  display: grid;
+  padding: 0;
+  place-items: center;
+}
+.tree-create-button:hover,
+.tree-create-folder:hover {
+  color: #17477f;
+  border-color: #b9cdea;
+  background: #e7f0fc;
+}
+.tree-create-button:focus-visible,
+.tree-create-folder:focus-visible {
+  outline: 2px solid var(--ui-blue);
+  outline-offset: 2px;
 }
 .tree {
   flex: 1;
@@ -948,6 +977,9 @@ button:disabled {
   color: #99958e;
   font-size: 10px;
   text-align: center;
+}
+.explorer-status {
+  padding-block: 10px;
 }
 
 .canvas-area {
