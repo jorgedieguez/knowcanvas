@@ -1,0 +1,17 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "knowcanvas-pages",
+  "compatibility_date": "2026-10-09",
+  "pages_build_output_dir": "../dist/client",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "knowcanvas-db",
+      "database_id": "eb802029-0e6b-47ac-9b48-31f4c5bc352b",
+      "migrations_dir": "../migrations",
+    },
+  ],
+  "vars": {
+    "APP_ORIGIN": "https://knowcanvas-pages.pages.dev",
+  },
+}

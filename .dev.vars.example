@@ -1,0 +1,17 @@
+# Copia este archivo como .dev.vars y completa las credenciales de una
+# aplicación web OAuth creada en Google Cloud Console.
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+
+# Base64url de 32 bytes para cifrar refresh tokens de Google Drive.
+GOOGLE_TOKEN_ENCRYPTION_KEY=""
+
+# Base64url de 32 bytes para cifrar secretos aportados por cada usuario.
+# Genera una con: openssl rand -base64 32 | tr '+/' '-_' | tr -d '='
+USER_SECRET_ENCRYPTION_KEY=""
+
+# URL local o dominio canónico de producción, sin barra final.
+APP_ORIGIN="http://127.0.0.1:5173"
+
+# Opcional: emails separados por coma para una beta cerrada.
+AUTH_ALLOWED_EMAILS=""

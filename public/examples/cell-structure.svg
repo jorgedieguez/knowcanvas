@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Estructura simplificada de una célula animal</title>
+  <desc id="desc">Ilustración de una célula con núcleo, mitocondrias, ribosomas y membrana.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f7f1e7"/>
+      <stop offset="1" stop-color="#e8f0e7"/>
+    </linearGradient>
+    <radialGradient id="cell" cx="42%" cy="35%" r="72%">
+      <stop stop-color="#fffdf7"/>
+      <stop offset="1" stop-color="#e6d8bd"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#33534a" flood-opacity=".14"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="680" rx="36" fill="url(#bg)"/>
+  <g opacity=".42" fill="#668078">
+    <circle cx="88" cy="96" r="4"/><circle cx="1110" cy="104" r="5"/><circle cx="108" cy="584" r="3"/>
+    <circle cx="1080" cy="574" r="4"/><circle cx="1018" cy="72" r="2"/><circle cx="179" cy="151" r="2"/>
+  </g>
+  <path d="M196 347c0-171 148-268 390-268 270 0 426 106 426 278 0 171-156 263-416 263-251 0-400-99-400-273Z" fill="url(#cell)" stroke="#59766b" stroke-width="9" filter="url(#shadow)"/>
+  <path d="M558 180c84-22 170 27 188 105 18 80-36 159-121 176-83 17-165-30-181-108-17-80 31-151 114-173Z" fill="#b5c8ae" stroke="#526f62" stroke-width="7"/>
+  <path d="M579 214c54-13 112 17 125 69 14 53-22 107-79 118-56 11-109-21-119-72-11-52 18-102 73-115Z" fill="#dfe8d6"/>
+  <circle cx="626" cy="304" r="24" fill="#6c826e"/>
+  <g fill="#bd7457" stroke="#8f4d3c" stroke-width="5">
+    <path d="M305 277c-31-51 29-92 89-64 51 24 54 81 11 111-44 31-78-10-100-47Z"/>
+    <path d="M770 409c-28-48 27-89 84-64 52 23 58 75 17 108-42 34-78-6-101-44Z"/>
+  </g>
+  <g fill="none" stroke="#f1c5a9" stroke-width="7" stroke-linecap="round">
+    <path d="M327 259c24-13 44-8 65 17"/><path d="M794 391c22-13 43-7 64 16"/>
+  </g>
+  <g fill="#d6a646">
+    <circle cx="363" cy="415" r="10"/><circle cx="411" cy="478" r="8"/><circle cx="819" cy="245" r="9"/>
+    <circle cx="881" cy="330" r="8"/><circle cx="699" cy="515" r="10"/><circle cx="478" cy="123" r="8"/>
+  </g>
+  <g fill="none" stroke="#829c91" stroke-width="8" stroke-linecap="round">
+    <path d="M343 378c55-44 108-37 143 8"/><path d="M761 181c42 20 71 52 81 94"/>
+    <path d="M476 526c58 24 105 17 145-18"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" fill="#32453f">
+    <text x="54" y="62" font-size="26" font-weight="700">CÉLULA ANIMAL</text>
+    <text x="842" y="542" font-size="20" font-weight="700">Membrana</text>
+    <path d="M844 516 960 466" stroke="#526f62" stroke-width="3"/>
+    <text x="768" y="118" font-size="20" font-weight="700">Núcleo</text>
+    <path d="m757 128-73 68" stroke="#526f62" stroke-width="3"/>
+    <text x="231" y="190" font-size="20" font-weight="700">Mitocondria</text>
+    <path d="m304 200 41 28" stroke="#8f4d3c" stroke-width="3"/>
+  </g>
+</svg>

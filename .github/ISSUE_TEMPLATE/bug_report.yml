@@ -1,0 +1,29 @@
+name: Error
+description: Comunica un problema reproducible
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: Descripción
+      description: ¿Qué ha ocurrido y qué esperabas?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Pasos para reproducirlo
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Navegador y sistema
+  - type: textarea
+    attributes:
+      label: Evidencias
+      description: Capturas, vídeo o mensajes de error sin secretos ni datos personales.
+  - type: checkboxes
+    attributes:
+      label: Seguridad
+      options:
+        - label: Confirmo que esto no contiene credenciales ni una vulnerabilidad sin divulgar.
+          required: true

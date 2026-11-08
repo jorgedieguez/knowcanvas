@@ -1,0 +1,63 @@
+{
+  "name": "knowcanvas",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Autoría visual e interactiva de experiencias de aprendizaje abiertas y exportables.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/jorgedieguez/KnowCanvas#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgedieguez/KnowCanvas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jorgedieguez/KnowCanvas/issues"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "tsc -b && vite build",
+    "build:pages": "npm run build && node scripts/prepare-pages.mjs",
+    "preview": "npm run build && vite preview",
+    "deploy": "npm run build && wrangler deploy",
+    "typecheck": "tsc -b --pretty false",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "db:migrate": "wrangler d1 migrations apply knowcanvas-db --local",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "dependencies": {
+    "@excalidraw/excalidraw": "^0.17.6",
+    "jose": "^6.2.12",
+    "lucide-react": "^1.54.0",
+    "pele": "^1.6.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.63.1",
+    "@cloudflare/workers-types": "^5.20261009.1",
+    "@eslint/js": "^9.39.5",
+    "@playwright/test": "^1.64.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.7.0",
+    "eslint": "^9.39.5",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.9",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.1",
+    "vite": "^6.4.4",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.149.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

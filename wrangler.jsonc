@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "knowcanvas",
+  "compatibility_date": "2026-10-09",
+  "main": "./src/worker/index.ts",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "knowcanvas-db",
+      "database_id": "eb802029-0e6b-47ac-9b48-31f4c5bc352b",
+      "migrations_dir": "migrations",
+    },
+  ],
+  // R2 se añadirá al activar el servicio en la cuenta de Cloudflare.
+  // Hasta entonces, el editor y D1 funcionan; la fototeca propia no está disponible.
+  "assets": {
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"],
+  },
+}
