@@ -282,9 +282,9 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado. Una tarea solo pa
   - Hecho: Worker y SPA desplegados en `knowcanvas.jorge-dieguez.workers.dev`, D1 remota creada y migraciones `0001`/`0002` aplicadas el 2026-10-22.
   - Hecho: secretos OAuth configurados; `/api/health`, `/api/me`, raíz y redirección Google verificados en producción.
   - Pendiente: habilitar Drive API y declarar `drive.file` en la pantalla de consentimiento; decidir/configurar Access o dominio final antes de considerar cerrado el hito.
-- [~] Cerrar documentación y guía operativa del MVP.
+- [x] Cerrar documentación y guía operativa del MVP.
   - Hecho: primera edición pública preparada con Apache-2.0, aviso de marca, README de instalación/autohospedado, guía de contribución, política de seguridad, código de conducta, plantillas de incidencias y CI.
-  - Pendiente: publicar el primer repositorio GitHub y validar el pipeline remoto.
+  - Hecho: repositorio público publicado en `github.com/jorgedieguez/KnowCanvas`; el primer pipeline remoto ejecutó `npm ci` y `npm run check` correctamente el 2026-11-08.
 
 ## Deuda y futuras capacidades
 

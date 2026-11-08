@@ -2,6 +2,12 @@
 
 - La identidad oficial usa `/public/brand/logo_knowcanvas_primary_20261101_horizontal.png`, paleta navy/azul/violeta con acentos amarillo/verde y el lema “Conocimiento que cobra vida”. La interfaz muestra la composición horizontal en cabeceras y recorta el símbolo desde el mismo maestro para usos pequeños, sin alterar el arte proporcionado.
 
+## 2026-11-08 — Primera publicación de código abierto
+
+- KnowCanvas se publica en `github.com/jorgedieguez/KnowCanvas` bajo Apache-2.0; el nombre, el logotipo y la identidad visual quedan reservados mediante `NOTICE`.
+- La edición pública incluye README de autohospedado, contribución, seguridad privada mediante GitHub, código de conducta, plantillas de incidencias y CI para `npm run check` sobre Node 22.
+- No se publican secretos locales ni credenciales. El primer workflow de GitHub Actions terminó correctamente sobre el commit inicial.
+
 ## 2026-11-08 — Navegación colocable y apertura del repositorio
 
 - Navegación deja de significar únicamente “botón”. El mismo contrato admite botón, menú/índice y barra anterior/siguiente; las dos últimas conservan una lista ordenada y resincronizable de páginas para que el autor pueda colocarlas donde la composición las necesite.
